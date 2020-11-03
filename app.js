@@ -63,9 +63,9 @@ app.use(bodyParser.json());
 // app.use('/', filter);
 
 
-app.get('/', (req, res) => {
-  res.send('Hi!')
-});
+// app.get('/', (req, res) => {
+//   res.send('Hi!')
+// });
 
 express()
     .use(express.static(path.join(__dirname, 'public')))
