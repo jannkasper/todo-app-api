@@ -73,7 +73,7 @@ app.get('/', (req, res) => {
 var server = httpProxy.createServer(function (req, res, proxy) {
   req.headers.host = 'jkasper-todo-app-api.herokuapp.com';
   proxy.proxyRequest(req, res, {
-    port: 80,
+    port: PORT,
     host: 'jkasper-todo-app-api.herokuapp.com'
   });
 }).listen(PORT, () => {
