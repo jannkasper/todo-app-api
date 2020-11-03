@@ -58,12 +58,18 @@ app.use(bodyParser.json());
 //User route
 // app.use(app.router);
 // filter.initialize(app);
-app.use('/', filter);
+// app.use('/', filter);
 
 
 app.get('/', (req, res) => {
   res.send('Hi!')
 });
+
+//Static import for .css, .js and img files
+app.use(express.static('public'));
+
+//Settig EJS view engine
+app.set('view engine', 'ejs');
 
 // app.set('view engine', '')
 
