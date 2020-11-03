@@ -18,6 +18,6 @@ exports.createFilter = (req, res) => {
     };
 
     Filter.create(newFilter).then(() => {
-        res.redirect('/filter/get-all')
+        res.redirect('/filter/all')
     })
 };

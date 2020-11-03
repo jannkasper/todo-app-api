@@ -1,3 +1,37 @@
+require('dotenv').config();
+
+const PORT = process.env.PORT || 5432;
+const express = require('express');
+const bodyParser = require('body-parser');
+const filter = require('./app/routes/filter.js');
+const project = require('./app/routes/project.js');
+const todo = require('./app/routes/todo.js');
+
+
+const app = express();
+
+// Request parses
+app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
+
+//User route
+app.use('/', filter);
+app.use('/', project);
+app.use('/', todo);
+
+
+// app.get('/', (req, res) => {
+//   res.send('Hi!')
+// });
+
+
+app.listen(PORT, () => {
+  console.log(`App running on port ${PORT}`)
+});
+
+
+
+
 // var createError = require('http-errors');
 // var express = require('express');
 // var path = require('path');
@@ -39,42 +73,3 @@
 // });
 //
 // module.exports = app;
-
-
-require('dotenv').config();
-
-const PORT = process.env.PORT || 5432;
-const express = require('express');
-const cool = require('cool-ascii-faces');
-const path = require('path');
-const bodyParser = require('body-parser');
-const filter = require('./app/routes/filter.js');
-
-
-const app = express();
-
-// Request parses
-app.use(bodyParser.urlencoded());
-app.use(bodyParser.json());
-
-//User route
-// app.use(app.router);
-// filter.initialize(app);
-app.use('/', filter);
-
-
-// app.get('/', (req, res) => {
-//   res.send('Hi!')
-// });
-
-// express()
-//     .use(express.static(path.join(__dirname, 'public')))
-//     .set('views', path.join(__dirname, 'views'))
-//     .set('view engine', 'ejs')
-//     .get('/', filter)
-//     .get('/cool', (req, res) => res.send(cool()))
-//     .listen(PORT, () => console.log(`App running on port ${ PORT }`));
-
-app.listen(PORT, () => {
-  console.log(`App running on port ${PORT}`)
-});
