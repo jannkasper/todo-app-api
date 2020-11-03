@@ -60,21 +60,21 @@ app.use(bodyParser.json());
 //User route
 // app.use(app.router);
 // filter.initialize(app);
-// app.use('/', filter);
+app.use('/', filter);
 
 
 // app.get('/', (req, res) => {
 //   res.send('Hi!')
 // });
 
-express()
-    .use(express.static(path.join(__dirname, 'public')))
-    .set('views', path.join(__dirname, 'views'))
-    .set('view engine', 'ejs')
-    .use('/', filter)
-    .get('/cool', (req, res) => res.send(cool()))
-    .listen(PORT, () => console.log(`App running on port ${ PORT }`));
+// express()
+//     .use(express.static(path.join(__dirname, 'public')))
+//     .set('views', path.join(__dirname, 'views'))
+//     .set('view engine', 'ejs')
+//     .get('/', filter)
+//     .get('/cool', (req, res) => res.send(cool()))
+//     .listen(PORT, () => console.log(`App running on port ${ PORT }`));
 
-// app.listen(PORT, () => {
-//   console.log(`App running on port ${PORT}`)
-// });
+app.listen(PORT, () => {
+  console.log(`App running on port ${PORT}`)
+});

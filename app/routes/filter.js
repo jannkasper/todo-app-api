@@ -3,7 +3,7 @@ const router = express.Router();
 
 const filterController = require('../controllers/filter');
 
-router.get('/filter/get-all', filterController.getAll);
+router.get('/', filterController.getAll);
 
 router.post('/filter/create-new', filterController.createFilter);
 
