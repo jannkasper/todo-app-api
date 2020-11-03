@@ -58,7 +58,7 @@ app.use(bodyParser.json());
 //User route
 // app.use(app.router);
 // filter.initialize(app);
-app.use('/', filter);
+// app.use('/', filter);
 
 
 app.get('/', (req, res) => {
