@@ -45,8 +45,8 @@ require('dotenv').config();
 
 const PORT = process.env.PORT || 5432;
 const express = require('express');
-const http = require('http');
-const httpProxy = require('http-proxy');
+const cool = require('cool-ascii-faces');
+const path = require('path');
 const bodyParser = require('body-parser');
 const filter = require('./app/routes/filter.js');
 
@@ -67,18 +67,13 @@ app.get('/', (req, res) => {
   res.send('Hi!')
 });
 
-// app.set('view engine', '')
-
-
-var server = httpProxy.createServer(function (req, res, proxy) {
-  req.headers.host = 'jkasper-todo-app-api.herokuapp.com';
-  proxy.proxyRequest(req, res, {
-    port: PORT,
-    host: 'jkasper-todo-app-api.herokuapp.com'
-  });
-}).listen(PORT, () => {
-  console.log(`App running on port ${PORT}`)
-});
+express()
+    .use(express.static(path.join(__dirname, 'public')))
+    .set('views', path.join(__dirname, 'views'))
+    .set('view engine', 'ejs')
+    .get('/', (req, res) => res.send('Hi!'))
+    .get('/cool', (req, res) => res.send(cool()))
+    .listen(PORT, () => console.log(`App running on port ${ PORT }`));
 
 // app.listen(PORT, () => {
 //   console.log(`App running on port ${PORT}`)
