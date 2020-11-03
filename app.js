@@ -45,6 +45,8 @@ require('dotenv').config();
 
 const PORT = process.env.PORT || 5432;
 const express = require('express');
+const http = require('http');
+const httpProxy = require('http-proxy');
 const bodyParser = require('body-parser');
 const filter = require('./app/routes/filter.js');
 
@@ -65,14 +67,19 @@ app.get('/', (req, res) => {
   res.send('Hi!')
 });
 
-//Static import for .css, .js and img files
-app.use(express.static('public'));
-
-//Settig EJS view engine
-app.set('view engine', 'ejs');
-
 // app.set('view engine', '')
 
-app.listen(PORT, () => {
+
+var server = httpProxy.createServer(function (req, res, proxy) {
+  req.headers.host = 'myapp.heroku.com';
+  proxy.proxyRequest(req, res, {
+    port: 80,
+    host: 'jkasper-todo-app-api.herokuapp.com'
+  });
+}).listen(PORT, () => {
   console.log(`App running on port ${PORT}`)
 });
+
+// app.listen(PORT, () => {
+//   console.log(`App running on port ${PORT}`)
+// });
