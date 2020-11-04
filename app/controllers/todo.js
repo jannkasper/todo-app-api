@@ -13,7 +13,7 @@ exports.getAll = (req, res) => {
 };
 
 
-exports.createTodo = (req, res) => {
+exports.addTodo = (req, res) => {
     let body = req.body;
 
     let newTodo = {
@@ -51,7 +51,7 @@ exports.updateTodo = (req, res) => {
             res.sendStatus(404)
         }
     })
-}
+};
 
 
 exports.deleteTodo = (req, res) => {

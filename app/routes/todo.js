@@ -5,7 +5,7 @@ const todoController = require('../controllers/todo');
 
 router.get('/todo/all', todoController.getAll);
 
-router.post('/todo/add', todoController.createTodo);
+router.post('/todo/add', todoController.addTodo);
 
 router.post('/todo/:id/update', todoController.updateTodo);
 

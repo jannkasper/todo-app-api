@@ -13,7 +13,7 @@ exports.getAll = (req, res) => {
 };
 
 
-exports.createFilter = (req, res) => {
+exports.addFilter = (req, res) => {
     let body = req.body;
 
     let newFilter = {
@@ -22,5 +22,45 @@ exports.createFilter = (req, res) => {
 
     Filter.create(newFilter).then(() => {
         res.redirect('/filter/all')
+    })
+};
+
+
+exports.updateFilter = (req, res) => {
+    let body = req.body;
+    let id = req.params['id'];
+
+    let newFilter = {
+        title: body['title']
+    };
+
+    Filter.update(newFilter, {
+        where: {
+            id: id
+        }
+    }).then((count) => {
+        if(count > 0){
+            res.redirect('/filter/all')
+        }
+        else {
+            res.sendStatus(404)
+        }
+    })
+};
+
+exports.deleteFilter = (req, res) => {
+    let id = req.params['id'];
+
+    Filter.destroy({
+        where: {
+            id: id
+        }
+    }).then((count) => {
+        if(count > 0){
+            res.redirect('/filter/all')
+        }
+        else {
+            res.sendStatus(404)
+        }
     })
 };

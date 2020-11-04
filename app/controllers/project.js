@@ -13,7 +13,7 @@ exports.getAll = (req, res) => {
 };
 
 
-exports.createProject = (req, res) => {
+exports.addProject = (req, res) => {
     let body = req.body;
 
     let newProject = {
@@ -22,5 +22,44 @@ exports.createProject = (req, res) => {
 
     Project.create(newProject).then(() => {
         res.redirect('/project/all')
+    })
+};
+
+exports.updateProject = (req, res) => {
+    let body = req.body;
+    let id = req.params['id'];
+
+    let newProject = {
+        title: body['title']
+    };
+
+    Project.update(newProject, {
+        where: {
+            id: id
+        }
+    }).then((count) => {
+        if(count > 0){
+            res.redirect('/project/all')
+        }
+        else {
+            res.sendStatus(404)
+        }
+    })
+};
+
+exports.deleteProject = (req, res) => {
+    let id = req.params['id'];
+
+    Project.destroy({
+        where: {
+            id: id
+        }
+    }).then((count) => {
+        if(count > 0){
+            res.redirect('/project/all')
+        }
+        else {
+            res.sendStatus(404)
+        }
     })
 };
