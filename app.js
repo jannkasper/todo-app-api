@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const PORT = process.env.PORT || 5432;
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const filter = require('./app/routes/filter.js');
 const project = require('./app/routes/project.js');
@@ -13,6 +14,11 @@ const app = express();
 // Request parses
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
+app.use(cors({
+  origin: ['http://localhost:3001', 'https://jkasper-todo-app-api.herokuapp.com'],
+  credentials: true
+}));
+
 
 //User route
 app.use('/', filter);
