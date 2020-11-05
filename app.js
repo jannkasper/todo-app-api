@@ -15,8 +15,8 @@ const app = express();
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(cors({
-  origin: ['http://localhost:3001', 'https://jkasper-todo-app-api.herokuapp.com'],
-  credentials: true
+  origin: 'https://jkasper-todo-app-api.herokuapp.com',
+  credentials: false
 }));
 
 
